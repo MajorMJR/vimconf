@@ -1,33 +1,31 @@
-" Leader Key as comma
-let mapleader = ","
-
 execute pathogen#infect()
 execute pathogen#helptags()
 
 " Use space instead of tabs 4 chars
+set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set shiftround
-set smartindent
-set autoindent
 
 " text wrapping
 set nowrap  " dont auto wrap on load
 set fo-=t   " dont wrap when typing
 
-" Proper paste
-set paste
+" Leader Key as comma
+let mapleader = ","
 
 " Enable auto indenting
 filetype plugin indent on
+
+" Identing options. 
+set autoindent
 
 " Dark background
 set background=dark
 
 " Syntax highlighting of course.
 syntax enable
-filetype on
 
 " Enable 256 colours
 set t_Co=256
@@ -52,12 +50,9 @@ set bs=2
 vnoremap < <gv 
 vnoremap > >gv
 
-" If i search in uppercase, it's case sensative. If I search in lowercase,
+" If i search in uppercase, it's case sensitive. If I search in lowercase,
 " it isn't.
 set smartcase
-
-" Identing options. I find these the best but some people prefer cindent
-set autoindent
 
 " Scroll sideways a character at a time, rather than a screen at a time
 set sidescroll=1
@@ -69,13 +64,10 @@ nnoremap <silent><F6> :set list!<CR>
 " line else and you can't see how much space you have.
 set scrolloff=3
 
-" tap F5 to toggle highlighting the search terms on and off
-nnoremap <silent><F5> :set hlsearch!<CR>
-
 " tap F3 to toggle line numbers
 nnoremap <silent><F3> :set number!<CR>
 
-" Tap 
+" Tap leader g to toggle gitgutter
 nmap <Leader>g :GitGutterToggle<CR>
 
 " show spelling mistakes by pressing F10. Move over a word and press tap z=
@@ -83,9 +75,9 @@ nmap <Leader>g :GitGutterToggle<CR>
 noremap <silent><F10> :set spell!<CR>
 
 " backup options
+set backup " enable backups
 set backupdir=~/tmp,/tmp " backups (~)
 set directory=~/tmp,/tmp " swap files
-set backup " enable backups
 
 " Start Nerdtree if no files specified
 autocmd StdinReadPre * let s:std_in=1

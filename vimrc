@@ -1,5 +1,5 @@
+" Start Pathogen plugin manager
 execute pathogen#infect()
-execute pathogen#helptags()
 
 " Use space instead of tabs 4 chars
 set expandtab
@@ -11,9 +11,6 @@ set shiftround
 " text wrapping
 set nowrap  " dont auto wrap on load
 set fo-=t   " dont wrap when typing
-
-" Leader Key as comma
-let mapleader = ","
 
 " Enable auto indenting
 filetype plugin indent on
@@ -57,11 +54,12 @@ set smartcase
 " Scroll sideways a character at a time, rather than a screen at a time
 set sidescroll=1
 
+set laststatus=2
+
+" show hidden characters
 nnoremap <silent><F6> :set list!<CR>
 
-" " Stops the cursor reaching the bottom of the screen which is a god send
-" because when you're writing huge functions you end up typing on the bottom
-" line else and you can't see how much space you have.
+" Stops the cursor reaching the bottom of the screen 
 set scrolloff=3
 
 " tap F3 to toggle line numbers
@@ -79,12 +77,12 @@ set backup " enable backups
 set backupdir=~/tmp,/tmp " backups (~)
 set directory=~/tmp,/tmp " swap files
 
+" Map Nerdtree
+map <Leader>n :NERDTreeToggle<CR>
+
 " Start Nerdtree if no files specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Map Nerdtree
-map <C-n> :NERDTreeToggle<CR>
 
 " Disable gitgutter by default
 let g:gitgutter_enabled = 0
@@ -111,6 +109,19 @@ let g:go_highlight_build_constraints = 1
 
 " Enable goimports
 let g:go_fmt_command = "goimports"
+" Syntastic also checks imports disables menu
+let g:go_fmt_fail_silently = 1
 
 " Map leader W to save without sudo
-noremap <Leader>W :w !sudo tee % > /dev/null
+noremap <Leader>w!! :w !sudo tee % > /dev/null
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+
+nnoremap <Leader>s :SyntasticCheck<CR>
+nnoremap <Leader>sd :SyntasticToggleMode<CR>

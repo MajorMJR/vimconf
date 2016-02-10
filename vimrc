@@ -80,6 +80,9 @@ set directory=~/tmp,/tmp " swap files
 " Map Nerdtree
 map <Leader>n :NERDTreeToggle<CR>
 
+" Map undotree toggle
+nnoremap <Leader>u :UndotreeToggle<CR>
+
 " Start Nerdtree if no files specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -109,11 +112,11 @@ let g:go_highlight_build_constraints = 1
 
 " Enable goimports
 let g:go_fmt_command = "goimports"
-" Syntastic also checks imports disables menu
+" Syntastic also checks imports, disables menu
 let g:go_fmt_fail_silently = 1
 
 " Map leader W to save without sudo
-noremap <Leader>w!! :w !sudo tee % > /dev/null
+noremap <Leader>w :w !sudo tee % > /dev/null
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -121,7 +124,6 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
 nnoremap <Leader>s :SyntasticCheck<CR>
 nnoremap <Leader>sd :SyntasticToggleMode<CR>
